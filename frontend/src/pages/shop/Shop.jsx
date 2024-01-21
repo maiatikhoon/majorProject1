@@ -15,7 +15,7 @@ const Shop = () => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await axios.get(`http://localhost:3001/api/products`);
+        const response = await axios.get(`https://food-delivery-app-backend-blond.vercel.app/api/dishes`);
         console.log(response.data);
         setProduct(response.data);
         setFoodOnly(response.data.filter((item) => item.category === "food"));

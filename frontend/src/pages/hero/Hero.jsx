@@ -3,6 +3,13 @@ import { useNavigate } from "react-router-dom";
 
 const Hero = () => {
   const navigate = useNavigate();
+  const user = localStorage.getItem("user");
+
+  const logoutUser = () => {
+    localStorage.removeItem("user");
+    location.reload();
+  };
+
   return (
     <div className="hero-section">
       <div className="hero-title">
@@ -15,9 +22,19 @@ const Hero = () => {
           authentic flavors of India's favorite snacks, sweets, and savories,
           all conveniently delivered to your doorstep.
         </p>
-        <button className="order-now-btn" onClick={() => navigate("/login")}>
-          Login now
-        </button>
+        <div>
+          <button
+            className="order-now-btn"
+            onClick={() => navigate(user ? "/foods" : "/login")}
+          >
+            {user ? "Start Ordering" : "Login now"}
+          </button>
+          {user && (
+            <button style={{marginLeft: '10px'}} className="order-now-btn" onClick={() => logoutUser()}>
+              {"Logout"}
+            </button>
+          )}
+        </div>
       </div>
       <div className="hero-image">
         <img

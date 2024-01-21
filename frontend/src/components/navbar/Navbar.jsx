@@ -3,10 +3,12 @@ import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import cart_icon from "../../images/food-cart-icon.png";
 import "./Navbar.css";
-import { useState,useEffect  } from "react";
+import { useState, useEffect } from "react";
 
 const Navbar = () => {
   const [menu, setMenu] = useState(false);
+  const user = localStorage.getItem("user");
+
   const handleChangeMenu = () => {
     setMenu(!menu);
   };
@@ -20,19 +22,23 @@ const Navbar = () => {
         <NavLink to="/about" className="nav-link">
           About
         </NavLink>
-        <NavLink to="/foods" className="nav-link">
-          Foods
-        </NavLink>
+        {user && (
+          <NavLink to="/foods" className="nav-link">
+            Foods
+          </NavLink>
+        )}
         <NavLink to="/contact" className="nav-link">
           Contact
         </NavLink>
       </div>
       <div className="nav-2">
-        <div className="cart-icon">
-          <NavLink to="/cart" className="nav-link cart-link">
-            <img src={cart_icon} alt="" />{" "}
-          </NavLink>
-        </div>
+        {user && (
+          <div className="cart-icon">
+            <NavLink to="/cart" className="nav-link cart-link">
+              <img src={cart_icon} alt="" />{" "}
+            </NavLink>
+          </div>
+        )}
         <button className="menu" onClick={handleChangeMenu}>
           {menu ? <CloseIcon /> : <MenuIcon />}
         </button>
